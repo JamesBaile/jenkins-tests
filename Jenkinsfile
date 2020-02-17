@@ -10,6 +10,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh "mvn clean install"
+                stash includes: '**/target/*.jar', name: 'artifact'
             }
         }
         stage('Second stage') {
@@ -18,6 +19,7 @@ pipeline {
                     agent any
                     steps {
                         echo 'Testing..'
+                        unstash 'artifact'
                         sh "java -jar jenkins-tests-1.0-SNAPSHOT.jar"
 
                     }
