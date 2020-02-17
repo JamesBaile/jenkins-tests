@@ -6,11 +6,9 @@ pipeline {
     }
     stage('Build') {
         agent any
-        stages {
-            steps {
-                echo 'Building..'
-                sh "mvn clean install"
-            }
+        steps {
+            echo 'Building..'
+            sh "mvn clean install"
         }
     }
     stage('Share artifact') {
