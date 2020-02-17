@@ -4,8 +4,9 @@ pipeline {
         maven 'Maven'
         jdk 'jdk8221'
     }
-    stages {
-        stage('Build') {
+    stage('Build') {
+        agent any
+        stages {
             steps {
                 echo 'Building..'
                 sh "mvn clean install"
