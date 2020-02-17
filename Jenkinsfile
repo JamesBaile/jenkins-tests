@@ -11,9 +11,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building..'
-                container('maven') {
-                    sh "mvn clean install"
-                }
+                sh "mvn clean install"
                 stash includes: '**/target/*.jar', name: 'artifact'
             }
         }
