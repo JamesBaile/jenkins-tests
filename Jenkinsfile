@@ -12,18 +12,20 @@ pipeline {
                 sh "mvn clean install"
             }
         }
-        stages('Share artifact') {
-            stage('Test') {
-                agent any
-                steps {
-                    echo 'Testing..'
-                    sh "java -jar jenkins-tests-1.0-SNAPSHOT.jar"
+        stage {
+            stages('Share artifact') {
+                stage('Test') {
+                    agent any
+                    steps {
+                        echo 'Testing..'
+                        sh "java -jar jenkins-tests-1.0-SNAPSHOT.jar"
 
+                    }
                 }
-            }
-            stage('Deploy') {
-                steps {
-                    echo 'Deploying....'
+                stage('Deploy') {
+                    steps {
+                        echo 'Deploying....'
+                    }
                 }
             }
         }
