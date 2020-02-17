@@ -23,20 +23,10 @@ spec:
     volumeMounts:
     - name: repository
       mountPath: /root/.m2/repository
-  - name: docker
-    image: docker:18.09.3
-    command: ["cat"]
-    tty: true
-    volumeMounts:
-    - name: docker-sock
-      mountPath: /var/run/docker.sock
-  volumes:
+   volumes:
   - name: repository
     persistentVolumeClaim:
       claimName: repository
-  - name: docker-sock
-    hostPath:
-      path: /var/run/docker.sock
 """
         }
     }
