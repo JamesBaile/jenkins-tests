@@ -11,9 +11,12 @@ pipeline {
                 sh "mvn clean install"
             }
         }
+    }
+    stages {
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh "java -jar jenkins-tests-1.0-SNAPSHOT.jar"
 
             }
         }
