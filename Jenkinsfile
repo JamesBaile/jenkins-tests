@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh "mvn clean install"
-                stash includes: '**/target/*.jar', name: 'artifact'
+                stash includes: '**/1.0-SNAPSHOT/*.jar', name: 'artifact'
             }
         }
         stage('Second stage') {
