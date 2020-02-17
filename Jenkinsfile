@@ -48,7 +48,9 @@ spec:
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "mvn clean install"
+                container('maven') {
+                    sh "mvn clean install"
+                }
                 stash includes: '**/target/*.jar', name: 'artifact'
             }
         }
