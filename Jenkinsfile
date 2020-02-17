@@ -12,17 +12,20 @@ pipeline {
             }
         }
     }
-    stages {
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-                sh "java -jar jenkins-tests-1.0-SNAPSHOT.jar"
+    stage('Share artifact') {
+        agent any
+        stages {
+            stage('Test') {
+                steps {
+                    echo 'Testing..'
+                    sh "java -jar jenkins-tests-1.0-SNAPSHOT.jar"
 
+                }
             }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
+            stage('Deploy') {
+                steps {
+                    echo 'Deploying....'
+                }
             }
         }
     }
