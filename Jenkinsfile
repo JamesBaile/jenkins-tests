@@ -10,7 +10,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh "mvn clean install"
-                stash includes: '**/1.0-SNAPSHOT/*.jar', name: 'artifact'
+                stash includes: '/home/jenkins/agent/workspace/sharing_artifacts/target/*.jar', name: 'artifact'
             }
         }
         stage('Second stage') {
