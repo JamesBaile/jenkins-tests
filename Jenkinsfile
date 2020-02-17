@@ -1,16 +1,55 @@
 pipeline {
-    agent any
-    tools {
-        maven 'Maven'
-        jdk 'jdk8221'
+//    agent any
+//    tools {
+//        maven 'Maven'
+//        jdk 'jdk8221'
+//    }
+    agent {
+        kubernetes {
+            label 'build-service'
+            defaultContainer 'jnlp'
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    job: build-service
+spec:
+  containers:
+  - name: maven
+    image: maven:3.6.0-jdk-11-slim
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: repository
+      mountPath: /root/.m2/repository
+  - name: docker
+    image: docker:18.09.3
+    command: ["cat"]
+    tty: true
+    volumeMounts:
+    - name: docker-sock
+      mountPath: /var/run/docker.sock
+  volumes:
+  - name: repository
+    persistentVolumeClaim:
+      claimName: repository
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock
+"""
+        }
     }
+    options {
+        skipDefaultCheckout true
+    }
+
     stages {
         stage('Build') {
-            agent any
             steps {
                 echo 'Building..'
                 sh "mvn clean install"
-                stash includes: '/home/jenkins/agent/workspace/sharing_artifacts/target/*.jar', name: 'artifact'
+                stash includes: '**/target/*.jar', name: 'artifact'
             }
         }
         stage('Second stage') {
