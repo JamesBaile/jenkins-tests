@@ -12,7 +12,7 @@ pipeline {
                 sh "mvn clean install"
             }
         }
-        stage {
+        stage('Second stage') {
             stages('Share artifact') {
                 stage('Test') {
                     agent any
