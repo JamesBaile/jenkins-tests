@@ -4,11 +4,14 @@ pipeline {
         maven 'Maven'
         jdk 'jdk8221'
     }
-    stage('Build') {
+    stages {
         agent any
-        steps {
-            echo 'Building..'
-            sh "mvn clean install"
+        stage('Build') {
+            agent any
+            steps {
+                echo 'Building..'
+                sh "mvn clean install"
+            }
         }
     }
     stage('Share artifact') {
