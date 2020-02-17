@@ -5,7 +5,6 @@ pipeline {
         jdk 'jdk8221'
     }
     stages {
-        agent any
         stage('Build') {
             agent any
             steps {
