@@ -48,6 +48,7 @@ spec:
             steps {
                 echo 'Building..'
                 container('maven') {
+                    sh "echo Workspace dir is ${pwd()}"
                     sh "mvn -B clean install"
                 }
                 stash includes: '**/target/*.jar', name: 'artifact'
