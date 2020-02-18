@@ -69,7 +69,7 @@ spec:
                     agent any
                     steps {
                         echo 'Testing..'
-//                        unstash 'artifact'
+                        unstash 'artifact'
                         sh "java -cp ./target/jenkins-tests-1.0-SNAPSHOT.jar JenkinsSandbox"
 
                     }
