@@ -70,7 +70,7 @@ spec:
                     steps {
                         echo 'Testing..'
 //                        unstash 'artifact'
-                        sh "java -jar jenkins-tests-1.0-SNAPSHOT.jar"
+                        sh "java -cp ./target/jenkins-tests-1.0-SNAPSHOT.jar JenkinsSandbox"
 
                     }
                 }
